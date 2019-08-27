@@ -264,10 +264,10 @@ module Roadworker
         resource_record_set_prev = @resource_record_set.dup
         Route53Wrapper::RRSET_ATTRS_WITH_TYPE.each do |attribute|
           expected = expected_record.send(attribute)
-          expected = expected.sort_by {|i| i.to_s } if expected.kind_of?(Array)
+          expected = sort_rrset_values(attribute, expected) if expected.kind_of?(Array)
           expected = nil if expected.kind_of?(Array) && expected.empty?
           actual = self.send(attribute)
-          actual = actual.sort_by {|i| i.to_s } if actual.kind_of?(Array)
+          actual = sort_rrset_values(attribute, actual) if actual.kind_of?(Array)
           actual = nil if actual.kind_of?(Array) && actual.empty?
 
           # XXX: Fix for diff
