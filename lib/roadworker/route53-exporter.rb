@@ -59,7 +59,7 @@ module Roadworker
           rrsets << record_h
 
           rrs = record_h.delete(:resource_records)
-          record_h[:resource_records] = rrs.map {|i| i[:value] }
+          record_h[:resource_records] = rrs.map {|i| i[:value] }.sort
 
           if (alias_target = record_h.delete(:alias_target))
             record_h[:dns_name] = alias_target[:dns_name]
